@@ -1,0 +1,62 @@
+@font-face {
+    font-family: coolvetica;
+    src: url(../fonts/coolvetica.ttf);
+}
+@font-face {
+    font-family: poiretone;
+    src: url(../fonts/PoiretOne.ttf);
+}
+@font-face {
+    font-family: nexalight;
+    src: url(../fonts/NexaLight.otf);
+}
+@font-face {
+    font-family: ubuntu;
+    src: url(../fonts/Ubuntu-B.ttf);
+}
+h2 {
+    padding: 10px 0;
+}
+.container {
+    max-width: 90%;
+    width: 90%;
+}
+.images {
+    max-width: 300px;
+    float: left;
+    margin: 10px;
+    border: 5px solid white;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    background: black;
+}
+
+/*Small - Large Devices */
+@media (min-width: 768px) and (max-width:3000px)  {
+    
+}
+
+
+/*Large Devices */
+@media (min-width: 1200px)  {
+    
+}
+
+/* Medium Devices*/
+@media (min-width:950px) and (max-width:1199px) {
+    
+
+}
+
+/* Small Devices */
+  @media (min-width:768px) and (max-width:949px) {
+     
+}
+
+/* Xtra Small Devices */
+  @media (max-width:767px) {
+     
+      
+}
+
