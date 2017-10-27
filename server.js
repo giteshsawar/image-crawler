@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express')
     ,path = require('path')
     ,bodyParser = require('body-parser')
@@ -51,25 +53,33 @@ io.on('connection', function(socket) {
     function crawlPage(page, callback) {
 
         visitedPage[page] = true;
-        requesturl(page, function(err, res, body) {
+        try {
+            requesturl(page, function(err, res, body) {
+                
+                if(err) {
+                    socket.emit(err);
+                }
+                if(res.statusCode !== 200 || res.statusCode === undefined) {
+                    socket.emit('err');
+                    return;
+                }
+               
+                getImage(body);
+            });
+        }
+        catch(e) {
             
-            if(err) {
-                socket.emit(err);
-            }
-            if(res.statusCode !== 200) {
-                socket.emit('err');
-                return;
-            }
-           
-            getImage(body);
-        });
+            socket.emit('sendimage', {images: images, url: baseurl});
+            console.log(images.length);
+            return;
+        }
 
     }
 
     function getImage(body) {
 
         let $ = cheerio.load(body);
-        console.log($._root.children);
+ 
         if(images.length === 0) {
             collectLinks($);
         }
@@ -87,7 +97,7 @@ io.on('connection', function(socket) {
             }
             imagesNum++;
         });
-        
+      
         if(imagesNum >= 25) {
             
             socket.emit('sendimage', {images: images, url: baseurl});
@@ -99,9 +109,10 @@ io.on('connection', function(socket) {
     function collectLinks($) {
 
         let link = $("a[href^='/']");
-
+    
         link.each(function(i, e) {
           pagesToVisit.push(baseurl + $(this).attr('href'));
+            console.log($(this).attr('href'));
         });
     }
 });
